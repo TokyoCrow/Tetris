@@ -8,10 +8,33 @@ namespace Tetris
         void Rotate();
     }
 
+    public class FigureO : IFigure
+    {
+        int condition = 0;
+        static int[,] figure = new int[2,2]
+        {
+            { 1,1 },
+            { 1,1 }
+        };
+
+        public int[,] GetFigure()
+        {
+            return figure;
+        }
+
+        public void Rotate()
+        {
+            if (condition == figure.Length)
+                condition = 0;
+            else
+                condition++;
+        }
+    }
+
     public class FigureI : IFigure
     {
         int condition = 0;
-        int[][,] figure = new int[2][,]
+        static int[][,] figure = new int[2][,]
         {
             new int[1, 4]
             {
@@ -43,7 +66,7 @@ namespace Tetris
     public class FigureS : IFigure
     {
         int condition = 0;
-        int[][,] figure = new int[2][,]
+        static int[][,] figure = new int[2][,]
         {
             new int[2, 3]
             {
@@ -75,7 +98,7 @@ namespace Tetris
     public class FigureZ : IFigure
     {
         int condition = 0;
-        int[][,] figure = new int[2][,]
+        static int[][,] figure = new int[2][,]
         {
             new int[2, 3]
             {
@@ -107,7 +130,7 @@ namespace Tetris
     public class FigureL : IFigure
     {
         int condition = 0;
-        int[][,] figure = new int[4][,]
+        static int[][,] figure = new int[4][,]
         {
             new int[2, 3]
             {
@@ -150,7 +173,7 @@ namespace Tetris
     public class FigureJ : IFigure
     {
         int condition = 0;
-        int[][,] figure = new int[4][,]
+        static int[][,] figure = new int[4][,]
         {
             new int[2, 3]
             {
@@ -193,7 +216,7 @@ namespace Tetris
     public class FigureT : IFigure
     {
         int condition = 0;
-        int[][,] figure = new int[4][,]
+        static int[][,] figure = new int[4][,]
         {
             new int[2, 3]
             {
