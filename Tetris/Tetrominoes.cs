@@ -4,7 +4,7 @@ namespace Tetris
 {
     interface ITetromino
     {
-        int[,] GetFigure();
+        int[,] GetTetromino();
         void Rotate();
     }
 
@@ -19,22 +19,16 @@ namespace Tetris
 
         public int[,] GetTetromino()
         {
-            return figure;
+            return tetromino;
         }
 
-        public void Rotate()
-        {
-            if (condition == figure.Length)
-                condition = 0;
-            else
-                condition++;
-        }
+        public void Rotate(){}
     }
 
-    public class FigureI : IFigure
+    public class TetrominoI : ITetromino
     {
         int condition = 0;
-        static int[][,] figure = new int[2][,]
+        static int[][,] tetromino = new int[2][,]
         {
             new int[1, 4]
             {
@@ -49,24 +43,24 @@ namespace Tetris
             }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
-            return figure[condition];
+            return tetromino[condition];
         }
 
         public void Rotate()
         {
-            if (condition == figure.Length)
+            if (condition == tetromino.Length)
                 condition = 0;
             else
                 condition++;
         }
     }
 
-    public class FigureS : IFigure
+    public class TetrominoS : ITetromino
     {
         int condition = 0;
-        static int[][,] figure = new int[2][,]
+        static int[][,] tetromino = new int[2][,]
         {
             new int[2, 3]
             {
@@ -81,24 +75,24 @@ namespace Tetris
             }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
-            return figure[condition];
+            return tetromino[condition];
         }
 
         public void Rotate()
         {
-            if (condition == figure.Length)
+            if (condition == tetromino.Length)
                 condition = 0;
             else
                 condition++;
         }
     }
 
-    public class FigureZ : IFigure
+    public class TetrominoZ : ITetromino
     {
         int condition = 0;
-        static int[][,] figure = new int[2][,]
+        static int[][,] tetromino = new int[2][,]
         {
             new int[2, 3]
             {
@@ -113,24 +107,24 @@ namespace Tetris
             }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
-            return figure[condition];
+            return tetromino[condition];
         }
 
         public void Rotate()
         {
-            if (condition == figure.Length)
+            if (condition == tetromino.Length)
                 condition = 0;
             else
                 condition++;
         }
     }
 
-    public class FigureL : IFigure
+    public class TetrominoL : ITetromino
     {
         int condition = 0;
-        static int[][,] figure = new int[4][,]
+        static int[][,] tetromino = new int[4][,]
         {
             new int[2, 3]
             {
@@ -156,24 +150,24 @@ namespace Tetris
             }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
-            return figure[condition];
+            return tetromino[condition];
         }
 
         public void Rotate()
         {
-            if (condition == figure.Length)
+            if (condition == tetromino.Length)
                 condition = 0;
             else
                 condition++;
         }
     }
 
-    public class FigureJ : IFigure
+    public class TetrominoJ : ITetromino
     {
         int condition = 0;
-        static int[][,] figure = new int[4][,]
+        static int[][,] tetromino = new int[4][,]
         {
             new int[2, 3]
             {
@@ -199,24 +193,24 @@ namespace Tetris
             }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
-            return figure[condition];
+            return tetromino[condition];
         }
 
         public void Rotate()
         {
-            if (condition == figure.Length)
+            if (condition == tetromino.Length)
                 condition = 0;
             else
                 condition++;
         }
     }
 
-    public class FigureT : IFigure
+    public class TetrominoT : ITetromino
     {
         int condition = 0;
-        static int[][,] figure = new int[4][,]
+        static int[][,] tetromino = new int[4][,]
         {
             new int[2, 3]
             {
@@ -242,14 +236,14 @@ namespace Tetris
             }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
-            return figure[condition];
+            return tetromino[condition];
         }
 
         public void Rotate()
         {
-            if (condition == figure.Length)
+            if (condition == tetromino.Length)
                 condition = 0;
             else
                 condition++;
