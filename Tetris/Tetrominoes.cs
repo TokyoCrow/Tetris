@@ -2,22 +2,22 @@
 
 namespace Tetris
 {
-    interface IFigure
+    interface ITetromino
     {
         int[,] GetFigure();
         void Rotate();
     }
 
-    public class FigureO : IFigure
+    public class TetrominoO : ITetromino
     {
         int condition = 0;
-        static int[,] figure = new int[2,2]
+        static int[,] tetromino = new int[2,2]
         {
             { 1,1 },
             { 1,1 }
         };
 
-        public int[,] GetFigure()
+        public int[,] GetTetromino()
         {
             return figure;
         }
