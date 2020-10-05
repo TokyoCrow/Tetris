@@ -103,4 +103,47 @@ namespace Tetris
                 condition++;
         }
     }
+
+    public class FigureL : IFigure
+    {
+        int condition = 0;
+        int[][,] figure = new int[4][,]
+        {
+            new int[2, 3]
+            {
+                { 1,1,1 },
+                { 1,0,0 }
+            },
+            new int[3, 2]
+            {
+                { 1,0 },
+                { 1,0 },
+                { 1,1 }
+            },
+            new int[2, 3]
+            {
+                { 0,0,1 },
+                { 1,1,1 }
+            },
+            new int[3, 2]
+            {
+                { 1,1 },
+                { 0,1 },
+                { 0,1 }
+            }
+        };
+
+        public int[,] GetFigure()
+        {
+            return figure[condition];
+        }
+
+        public void Rotate()
+        {
+            if (condition == figure.Length)
+                condition = 0;
+            else
+                condition++;
+        }
+    }
 }
