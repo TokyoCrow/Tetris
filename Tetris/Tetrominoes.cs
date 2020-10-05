@@ -5,13 +5,13 @@ namespace Tetris
     interface ITetromino
     {
         int[,] GetTetromino();
-        void Rotate();
+        void RotateRight();
+        void RotateLeft();
     }
 
     public class TetrominoO : ITetromino
     {
-        int condition = 0;
-        static int[,] tetromino = new int[2,2]
+        static int[,] tetromino = new int[2, 2]
         {
             { 1,1 },
             { 1,1 }
@@ -22,7 +22,8 @@ namespace Tetris
             return tetromino;
         }
 
-        public void Rotate(){}
+        public void RotateRight() { }
+        public void RotateLeft() { }
     }
 
     public class TetrominoI : ITetromino
@@ -48,12 +49,20 @@ namespace Tetris
             return tetromino[condition];
         }
 
-        public void Rotate()
+        public void RotateRight()
         {
-            if (condition == tetromino.Length)
+            if (condition == tetromino.Length - 1)
                 condition = 0;
             else
                 condition++;
+        }
+
+        public void RotateLeft()
+        {
+            if (condition == 0)
+                condition = tetromino.Length - 1;
+            else
+                condition--;
         }
     }
 
@@ -80,12 +89,20 @@ namespace Tetris
             return tetromino[condition];
         }
 
-        public void Rotate()
+        public void RotateRight()
         {
-            if (condition == tetromino.Length)
+            if (condition == tetromino.Length - 1)
                 condition = 0;
             else
                 condition++;
+        }
+
+        public void RotateLeft()
+        {
+            if (condition == 0)
+                condition = tetromino.Length - 1;
+            else
+                condition--;
         }
     }
 
@@ -112,12 +129,20 @@ namespace Tetris
             return tetromino[condition];
         }
 
-        public void Rotate()
+        public void RotateRight()
         {
-            if (condition == tetromino.Length)
+            if (condition == tetromino.Length - 1)
                 condition = 0;
             else
                 condition++;
+        }
+
+        public void RotateLeft()
+        {
+            if (condition == 0)
+                condition = tetromino.Length - 1;
+            else
+                condition--;
         }
     }
 
@@ -155,12 +180,20 @@ namespace Tetris
             return tetromino[condition];
         }
 
-        public void Rotate()
+        public void RotateRight()
         {
-            if (condition == tetromino.Length)
+            if (condition == tetromino.Length - 1)
                 condition = 0;
             else
                 condition++;
+        }
+
+        public void RotateLeft()
+        {
+            if (condition == 0)
+                condition = tetromino.Length - 1;
+            else
+                condition--;
         }
     }
 
@@ -198,12 +231,20 @@ namespace Tetris
             return tetromino[condition];
         }
 
-        public void Rotate()
+        public void RotateRight()
         {
-            if (condition == tetromino.Length)
+            if (condition == tetromino.Length - 1)
                 condition = 0;
             else
                 condition++;
+        }
+
+        public void RotateLeft()
+        {
+            if (condition == 0)
+                condition = tetromino.Length - 1;
+            else
+                condition--;
         }
     }
 
@@ -241,12 +282,20 @@ namespace Tetris
             return tetromino[condition];
         }
 
-        public void Rotate()
+        public void RotateRight()
         {
-            if (condition == tetromino.Length)
+            if (condition == tetromino.Length - 1 - 1)
                 condition = 0;
             else
                 condition++;
+        }
+
+        public void RotateLeft()
+        {
+            if (condition == 0)
+                condition = tetromino.Length - 1 - 1;
+            else
+                condition--;
         }
     }
 }

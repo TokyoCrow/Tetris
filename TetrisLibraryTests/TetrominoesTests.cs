@@ -14,72 +14,84 @@ namespace TetrisLibraryTests
         TetrominoT tetrominoT = new TetrominoT();
 
         [Fact]
-        public void TetrominoORotateTest()
+        public void TetrominoORotateRightTest()
         {
-            Equals(new int[2, 2] { { 1, 1 },{ 1, 1 } }, tetrominoO.GetTetromino());
-            tetrominoO.Rotate();
+            Equals(new int[2, 2] { { 1, 1 }, { 1, 1 } }, tetrominoO.GetTetromino());
+            tetrominoO.RotateRight();
+            Equals(new int[2, 2] { { 1, 1 }, { 1, 1 } }, tetrominoO.GetTetromino());
+            tetrominoO.RotateRight();
             Equals(new int[2, 2] { { 1, 1 }, { 1, 1 } }, tetrominoO.GetTetromino());
         }
 
         [Fact]
-        public void TetrominoIRotateTest()
+        public void TetrominoIRotateRightTest()
         {
-            Equals(new int[1, 4] { { 1,1,1,1 } }, tetrominoI.GetTetromino());
-            tetrominoI.Rotate();
+            Equals(new int[1, 4] { { 1, 1, 1, 1 } }, tetrominoI.GetTetromino());
+            tetrominoI.RotateRight();
             Equals(new int[4, 1] { { 1 },{ 1 },{ 1 },{ 1 } }, tetrominoI.GetTetromino());
+            tetrominoI.RotateRight();
+            Equals(new int[1, 4] { { 1, 1, 1, 1 } }, tetrominoI.GetTetromino());
         }
 
         [Fact]
-        public void TetrominoSRotateTest()
+        public void TetrominoSRotateRightTest()
         {
             TetrominoS tetromino = new TetrominoS();
             Equals(new int[2, 3] { { 0, 1, 1 }, { 1, 1, 0 } }, tetrominoS.GetTetromino());
-            tetrominoS.Rotate();
+            tetrominoS.RotateRight();
             Equals(new int[3, 2] { { 1, 0 }, { 1, 1 }, { 0, 1 } }, tetrominoS.GetTetromino());
         }
 
         [Fact]
-        public void TetrominoZRotateTest()
+        public void TetrominoZRotateRightTest()
         {
             Equals(new int[2, 3] { { 1, 1, 0 }, { 0, 1, 1 } }, tetrominoZ.GetTetromino());
-            tetrominoZ.Rotate();
+            tetrominoZ.RotateRight();
             Equals(new int[3, 2] { { 0, 1 }, { 1, 1 }, { 1, 0 } }, tetrominoZ.GetTetromino());
+            tetrominoZ.RotateRight();
+            Equals(new int[2, 3] { { 1, 1, 0 }, { 0, 1, 1 } }, tetrominoZ.GetTetromino());
         }
 
         [Fact]
-        public void TetrominoLRotateTest()
+        public void TetrominoLRotateRightTest()
         {
             Equals(new int[2, 3] { { 1, 1, 1 }, { 1, 0, 0 } }, tetrominoL.GetTetromino());
-            tetrominoL.Rotate();
+            tetrominoL.RotateRight();
             Equals(new int[3, 2] { { 1, 0 }, { 1, 0 }, { 1, 1 } }, tetrominoL.GetTetromino());
-            tetrominoL.Rotate();
+            tetrominoL.RotateRight();
             Equals(new int[2, 3] { { 0, 0, 1 }, { 1, 1, 1 } }, tetrominoL.GetTetromino());
-            tetrominoL.Rotate();
+            tetrominoL.RotateRight();
             Equals(new int[3, 2] { { 1, 1 }, { 0, 1 }, { 0, 1 } }, tetrominoL.GetTetromino());
+            tetrominoL.RotateRight();
+            Equals(new int[2, 3] { { 1, 1, 1 }, { 1, 0, 0 } }, tetrominoL.GetTetromino());
         }
 
         [Fact]
-        public void TetrominoJRotateTest()
+        public void TetrominoJRotateRightTest()
         {
             Equals(new int[2, 3] { { 1, 1, 1 }, { 0, 0, 1 } }, tetrominoJ.GetTetromino());
-            tetrominoJ.Rotate();
+            tetrominoJ.RotateRight();
             Equals(new int[3, 2] { { 1, 1 }, { 1, 0 }, { 1, 0 } }, tetrominoJ.GetTetromino());
-            tetrominoJ.Rotate();
+            tetrominoJ.RotateRight();
             Equals(new int[2, 3] { { 1, 0, 0 }, { 1, 1, 1 } }, tetrominoJ.GetTetromino());
-            tetrominoJ.Rotate();
+            tetrominoJ.RotateRight();
             Equals(new int[3, 2] { { 0, 1 }, { 0, 1 }, { 1, 1 } }, tetrominoJ.GetTetromino());
+            tetrominoJ.RotateRight();
+            Equals(new int[2, 3] { { 1, 1, 1 }, { 0, 0, 1 } }, tetrominoJ.GetTetromino());
         }
 
         [Fact]
-        public void TetrominoTRotateTest()
+        public void TetrominoTRotateRightTest()
         {
             Equals(new int[2, 3] { { 1, 1, 1 }, { 0, 1, 0 } }, tetrominoT.GetTetromino());
-            tetrominoT.Rotate();
+            tetrominoT.RotateRight();
             Equals(new int[3, 2] { { 1, 0 }, { 1, 1 }, { 1, 0 } }, tetrominoT.GetTetromino());
-            tetrominoT.Rotate();
+            tetrominoT.RotateRight();
             Equals(new int[2, 3] { { 0, 1, 0 }, { 1, 1, 1 } }, tetrominoT.GetTetromino());
-            tetrominoT.Rotate();
+            tetrominoT.RotateRight();
             Equals(new int[3, 2] { { 0, 1 }, { 1, 1 }, { 0, 1 } }, tetrominoT.GetTetromino());
+            tetrominoT.RotateRight();
+            Equals(new int[2, 3] { { 1, 1, 1 }, { 0, 1, 0 } }, tetrominoT.GetTetromino());
         }
 
     }
