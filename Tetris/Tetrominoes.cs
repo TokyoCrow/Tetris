@@ -2,7 +2,7 @@
 
 namespace Tetris
 {
-    interface ITetromino
+    public interface ITetromino
     {
         int[,] GetTetromino();
         void RotateRight();

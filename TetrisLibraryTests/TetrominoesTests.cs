@@ -40,6 +40,8 @@ namespace TetrisLibraryTests
             Equals(new int[2, 3] { { 0, 1, 1 }, { 1, 1, 0 } }, tetrominoS.GetTetromino());
             tetrominoS.RotateRight();
             Equals(new int[3, 2] { { 1, 0 }, { 1, 1 }, { 0, 1 } }, tetrominoS.GetTetromino());
+            tetrominoS.RotateRight();
+            Equals(new int[2, 3] { { 0, 1, 1 }, { 1, 1, 0 } }, tetrominoS.GetTetromino());
         }
 
         [Fact]
