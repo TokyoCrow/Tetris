@@ -6,8 +6,10 @@ namespace Tetris
     {
         public int[,] gameField { get; private set; } = new int[20, 10];
         public int Score { get; private set; } = 0;
-        public int FaillingTetrominoX { get; private set; } = 3;
-        public int FaillingTetrominoY { get; private set; } = 20;
+        static int newTetrominoStartX = 3;
+        static int newTetrominoStartY = 20;
+        int faillingTetrominoX = newTetrominoStartX;
+        int faillingTetrominoY = newTetrominoStartY;
         public ITetromino FaillingTetromino { get; private set; }
         public ITetromino NextTetromino { get; private set; }
         Random random = new Random();
@@ -33,16 +35,7 @@ namespace Tetris
             return new TetrominoO();
         }
 
-        void TetrominoMoveDown()
-        {
-            FaillingTetrominoY++;
-            if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
-            {
-                FaillingTetrominoY--;
-            }
-        }
-
-        void TetrominoRotateLeft()
+        public void TetrominoRotateLeft()
         {
             FaillingTetromino.RotateLeft();
             if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
@@ -51,7 +44,7 @@ namespace Tetris
             }
         }
 
-        void TetrominoRotateRight()
+        public void TetrominoRotateRight()
         {
             FaillingTetromino.RotateRight();
             if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
@@ -60,30 +53,39 @@ namespace Tetris
             }
         }
 
-        void TetrominoMoveRight()
+        public void TetrominoMoveDown()
         {
-            FaillingTetrominoX++;
+            faillingTetrominoY++;
             if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
             {
-                FaillingTetrominoX--;
+                faillingTetrominoY--;
             }
         }
 
-        void TetrominoMoveLeft()
+        public void TetrominoMoveRight()
         {
-            FaillingTetrominoX--;
+            faillingTetrominoX++;
             if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
             {
-                FaillingTetrominoX++;
+                faillingTetrominoX--;
+            }
+        }
+
+        public void TetrominoMoveLeft()
+        {
+            faillingTetrominoX--;
+            if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
+            {
+                faillingTetrominoX++;
             }
         }
 
         bool IsCollisionBorder()
         {
             return (
-                ((FaillingTetrominoX + FaillingTetromino.GetTetromino().GetLength(0)) >= gameField.GetLength(0)) ||
-                (FaillingTetrominoX <= 0) ||
-                ((FaillingTetrominoY - FaillingTetromino.GetTetromino().Rank) <= 0)
+                ((faillingTetrominoX + FaillingTetromino.GetTetromino().GetLength(0)) >= gameField.GetLength(0)) ||
+                (faillingTetrominoX <= 0) ||
+                ((faillingTetrominoY - FaillingTetromino.GetTetromino().Rank) <= 0)
                 );
         }
 
@@ -92,12 +94,10 @@ namespace Tetris
             for (var y = 0; y < FaillingTetromino.GetTetromino().GetLength(0); y++)
                 for (var x = 0; x < FaillingTetromino.GetTetromino().GetLength(1); x++)
                 {
-                    if (gameField[FaillingTetrominoY + y, FaillingTetrominoX + x] != 0)
+                    if (gameField[faillingTetrominoY + y, faillingTetrominoX + x] != 0)
                         return true;
                 }
             return false;
         }
-
-
     }
 }
