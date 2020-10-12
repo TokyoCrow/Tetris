@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tetris
+﻿namespace Tetris
 {
     public interface ITetromino
     {
