@@ -6,10 +6,11 @@ namespace Tetris
     {
         public int[,] GameField { get; private set; } = new int[20, 10];
         public int Score { get; private set; } = 0;
-        static int newTetrominoStartX = 3;
-        static int newTetrominoStartY = 20;
-        int faillingTetrominoX = newTetrominoStartX;
-        int faillingTetrominoY = newTetrominoStartY;
+        public bool IsGameLost { get; private set; } = false;
+        static int newTetrominoStartX = 2;
+        static int newTetrominoStartY = 0;
+        public int FallingTetrominoX { get; private set; } = newTetrominoStartX;
+        public int FallingTetrominoY { get; private set; } = newTetrominoStartY;
         public ITetromino FallingTetromino { get; private set; }
         public ITetromino NextTetromino { get; private set; }
         Random random = new Random();
@@ -30,21 +31,21 @@ namespace Tetris
                 case 3: return new TetrominoZ();
                 case 4: return new TetrominoL();
                 case 5: return new TetrominoJ();
-                case 6: return new TetrominoT();
+                default: return new TetrominoT();
             }
-            return new TetrominoO();
         }
 
-        public void TetrominoRotateLeft()
+        void ChangeTetromino()
         {
-            FallingTetromino.RotateLeft();
-            if (IsCollisionBorder() || IsCollisionFloor() || IsCollisionInstalledTetrominoes())
-            {
-                FallingTetromino.RotateRight();
-            }
+            FallingTetromino = NextTetromino;
+            FallingTetrominoX = newTetrominoStartX;
+            FallingTetrominoY = newTetrominoStartY;
+            if (IsCollisionInstalledTetrominoes())
+                IsGameLost = true;
+            NextTetromino = GetNewTetramino();
         }
 
-        public void TetrominoRotateRight()
+        public void TetrominoRotate()
         {
             FallingTetromino.RotateRight();
             if (IsCollisionBorder() || IsCollisionFloor() || IsCollisionInstalledTetrominoes())
@@ -55,37 +56,37 @@ namespace Tetris
 
         public void TetrominoMoveDown()
         {
-            faillingTetrominoY++;
+            FallingTetrominoY++;
             if (IsCollisionFloor() || IsCollisionInstalledTetrominoes())
             {
-                faillingTetrominoY--;
+                FallingTetrominoY--;
                 ConnectTetrominoToGameField();
             }
         }
 
         public void TetrominoMoveRight()
         {
-            faillingTetrominoX++;
+            FallingTetrominoX++;
             if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
             {
-                faillingTetrominoX--;
+                FallingTetrominoX--;
             }
         }
 
         public void TetrominoMoveLeft()
         {
-            faillingTetrominoX--;
+            FallingTetrominoX--;
             if (IsCollisionBorder() || IsCollisionInstalledTetrominoes())
             {
-                faillingTetrominoX++;
+                FallingTetrominoX++;
             }
         }
 
         public bool IsCollisionBorder()
         {
             return (
-                ((faillingTetrominoX + FallingTetromino.GetTetromino().GetLength(0)) >= GameField.GetLength(0)) ||
-                (faillingTetrominoX <= 0)
+                ((FallingTetrominoX + FallingTetromino.GetTetromino().GetLength(1)) > GameField.GetLength(1)) ||
+                (FallingTetrominoX < 0)
                 );
         }
 
@@ -94,7 +95,8 @@ namespace Tetris
             for (var y = 0; y < FallingTetromino.GetTetromino().GetLength(0); y++)
                 for (var x = 0; x < FallingTetromino.GetTetromino().GetLength(1); x++)
                 {
-                    if (GameField[faillingTetrominoY + y, faillingTetrominoX + x] != 0)
+                    if ((FallingTetromino.GetTetromino()[y, x] != 0) &&
+                        (GameField[FallingTetrominoY + y, FallingTetrominoX + x] != 0))
                         return true;
                 }
             return false;
@@ -102,9 +104,7 @@ namespace Tetris
 
         public bool IsCollisionFloor()
         {
-            if ((faillingTetrominoY + FallingTetromino.GetTetromino().Rank) > GameField.Rank)
-                return false;
-            return true;
+            return (FallingTetrominoY > GameField.GetLength(0) - FallingTetromino.GetTetromino().GetLength(0));
         }
 
         void ConnectTetrominoToGameField()
@@ -112,9 +112,40 @@ namespace Tetris
             for (var y = 0; y < FallingTetromino.GetTetromino().GetLength(0); y++)
                 for (var x = 0; x < FallingTetromino.GetTetromino().GetLength(1); x++)
                 {
-                    if (FallingTetromino.GetTetromino()[y,x] != 0)
-                        GameField[faillingTetrominoY + y, faillingTetrominoX + x] = 1;
+                    if (FallingTetromino.GetTetromino()[y, x] != 0)
+                        GameField[FallingTetrominoY + y, FallingTetrominoX + x] = 1;
                 }
+            CheckStrip();
+            ChangeTetromino();
+        }
+
+        void CheckStrip()
+        {
+            for (var y = GameField.GetLength(0)-1; y >= 0 ; y--)
+            {
+                var stripCounter = 0;
+                for (var x = 0; x < GameField.GetLength(1); x++)
+                {
+                    if (GameField[y, x] != 0)
+                        stripCounter++;
+                    else
+                        break;
+                }
+                if (stripCounter == GameField.GetLength(1))
+                    DeleteStrip(y);
+            }
+        }
+
+        void DeleteStrip(int stripY)
+        {
+            Score++;
+            for (var y = stripY; y > 1; y--)
+            {
+                for (var x = 0; x < GameField.GetLength(1); x++)
+                {
+                    GameField[y, x] = GameField[y - 1, x];
+                }
+            }
         }
     }
 }
