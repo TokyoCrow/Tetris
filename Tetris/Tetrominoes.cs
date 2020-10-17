@@ -282,7 +282,7 @@
 
         public void RotateRight()
         {
-            if (condition == tetromino.Length - 1 - 1)
+            if (condition == tetromino.Length - 1)
                 condition = 0;
             else
                 condition++;
@@ -291,7 +291,7 @@
         public void RotateLeft()
         {
             if (condition == 0)
-                condition = tetromino.Length - 1 - 1;
+                condition = tetromino.Length - 1;
             else
                 condition--;
         }
