@@ -4,7 +4,7 @@ namespace Tetris
 {
     public class Tetris
     {
-        public int[,] GameField { get; private set; } = new int[20, 10];
+        public int[,] GameField { get; set; } = new int[20, 10];
         public int Score { get; private set; } = 0;
         public bool IsGameLost { get; private set; } = false;
         static int newTetrominoStartX = 2;
@@ -119,7 +119,7 @@ namespace Tetris
             ChangeTetromino();
         }
 
-        void CheckStrip()
+        public void CheckStrip()
         {
             for (var y = GameField.GetLength(0)-1; y >= 0 ; y--)
             {
@@ -132,7 +132,10 @@ namespace Tetris
                         break;
                 }
                 if (stripCounter == GameField.GetLength(1))
+                {
                     DeleteStrip(y);
+                    y++;
+                }
             }
         }
 
