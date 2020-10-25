@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetris", "Tetris\Tetris.csproj", "{5CE1B0D8-F167-404B-B125-608E4DAF2C77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetris.Core", "Tetris\Tetris.Core.csproj", "{5CE1B0D8-F167-404B-B125-608E4DAF2C77}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TetrisLibraryTests", "TetrisLibraryTests\TetrisLibraryTests.csproj", "{38DEB034-61A5-4AB1-9BED-FAAE401B21C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetris.Game.UnitTests", "TetrisLibraryTests\Tetris.Game.UnitTests.csproj", "{38DEB034-61A5-4AB1-9BED-FAAE401B21C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TetrisVisual", "TetrisVisual\TetrisVisual.csproj", "{FD219909-F4A3-4E68-94B3-C4B2097DAE1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris.WindowsForms", "TetrisVisual\Tetris.WindowsForms.csproj", "{FD219909-F4A3-4E68-94B3-C4B2097DAE1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

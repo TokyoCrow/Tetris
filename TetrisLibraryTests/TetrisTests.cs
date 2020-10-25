@@ -1,14 +1,13 @@
 ﻿using Xunit;
 
-namespace TetrisLibraryTests
+namespace Tetris.Game.UnitTests
 {
     public class TetrisTests
     {
         [Fact]
         public void CheckStripTest() 
         {
-            Tetris.Tetris tetris = new Tetris.Tetris();
-            tetris.GameField = new int[20, 10]
+            Core.Tetris tetris = new Core.Tetris(new int[20, 10]
             {
                 { 0,0,0,0,0,0,0,0,0,0 },
                 { 0,0,0,0,0,0,0,0,0,0 },
@@ -30,9 +29,9 @@ namespace TetrisLibraryTests
                 { 1,1,1,1,1,1,1,1,1,1 },
                 { 1,1,1,1,1,1,1,1,1,1 },
                 { 1,1,1,1,1,1,1,1,1,1 }
-            };
+            });
             tetris.CheckStrip();
-            Equals(new int[20, 10] ,tetris.GameField );
+            Assert.Equal(new int[20, 10] ,tetris.GameField );
         }
     }
 }

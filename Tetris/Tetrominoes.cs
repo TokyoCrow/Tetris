@@ -1,4 +1,4 @@
-﻿namespace Tetris
+﻿namespace Tetris.Core
 {
     public interface ITetromino
     {
@@ -9,10 +9,10 @@
 
     public class TetrominoO : ITetromino
     {
-        static int[,] tetromino = new int[2, 2]
+        private static readonly int[,] tetromino = 
         {
-            { 1,1 },
-            { 1,1 }
+            {1, 1},
+            {1, 1}
         };
 
         public int[,] GetTetromino()
@@ -20,27 +20,33 @@
             return tetromino;
         }
 
-        public void RotateRight() { }
-        public void RotateLeft() { }
+        public void RotateRight()
+        {
+        }
+
+        public void RotateLeft()
+        {
+        }
     }
 
     public class TetrominoI : ITetromino
     {
-        int condition = 0;
-        static int[][,] tetromino = new int[2][,]
+        private static readonly int[][,] tetromino = 
         {
-            new int[1, 4]
+            new int[,] 
             {
-                { 1,1,1,1 }
+                {1, 1, 1, 1}
             },
-            new int[4, 1]
+            new int[,] 
             {
-                { 1 },
-                { 1 },
-                { 1 },
-                { 1 }
+                {1},
+                {1},
+                {1},
+                {1}
             }
         };
+
+        private int condition;
 
         public int[,] GetTetromino()
         {
@@ -66,21 +72,22 @@
 
     public class TetrominoS : ITetromino
     {
-        int condition = 0;
-        static int[][,] tetromino = new int[2][,]
+        private static readonly int[][,] tetromino =
         {
-            new int[2, 3]
+            new int[,]
             {
-                { 0,1,1 },
-                { 1,1,0 }
+                {0, 1, 1},
+                {1, 1, 0}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 1,0 },
-                { 1,1 },
-                { 0,1 }
+                {1, 0},
+                {1, 1},
+                {0, 1}
             }
         };
+
+        private int condition;
 
         public int[,] GetTetromino()
         {
@@ -106,21 +113,22 @@
 
     public class TetrominoZ : ITetromino
     {
-        int condition = 0;
-        static int[][,] tetromino = new int[2][,]
+        private static readonly int[][,] tetromino = 
         {
-            new int[2, 3]
+            new int[,]
             {
-                { 1,1,0 },
-                { 0,1,1 }
+                {1, 1, 0},
+                {0, 1, 1}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 0,1 },
-                { 1,1 },
-                { 1,0 }
+                {0, 1},
+                {1, 1},
+                {1, 0}
             }
         };
+
+        private int condition;
 
         public int[,] GetTetromino()
         {
@@ -146,32 +154,33 @@
 
     public class TetrominoL : ITetromino
     {
-        int condition = 0;
-        static int[][,] tetromino = new int[4][,]
+        private static readonly int[][,] tetromino = 
         {
-            new int[2, 3]
+            new int[,]
             {
-                { 1,1,1 },
-                { 1,0,0 }
+                {1, 1, 1},
+                {1, 0, 0}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 1,0 },
-                { 1,0 },
-                { 1,1 }
+                {1, 0},
+                {1, 0},
+                {1, 1}
             },
-            new int[2, 3]
+            new int[,]
             {
-                { 0,0,1 },
-                { 1,1,1 }
+                {0, 0, 1},
+                {1, 1, 1}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 1,1 },
-                { 0,1 },
-                { 0,1 }
+                {1, 1},
+                {0, 1},
+                {0, 1}
             }
         };
+
+        private int condition;
 
         public int[,] GetTetromino()
         {
@@ -197,32 +206,33 @@
 
     public class TetrominoJ : ITetromino
     {
-        int condition = 0;
-        static int[][,] tetromino = new int[4][,]
+        private static readonly int[][,] tetromino = 
         {
-            new int[2, 3]
+            new int[,]
             {
-                { 1,1,1 },
-                { 0,0,1 }
+                {1, 1, 1},
+                {0, 0, 1}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 1,1 },
-                { 1,0 },
-                { 1,0 }
+                {1, 1},
+                {1, 0},
+                {1, 0}
             },
-            new int[2, 3]
+            new int[,]
             {
-                { 1,0,0 },
-                { 1,1,1 }
+                {1, 0, 0},
+                {1, 1, 1}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 0,1 },
-                { 0,1 },
-                { 1,1 }
+                {0, 1},
+                {0, 1},
+                {1, 1}
             }
         };
+
+        private int condition;
 
         public int[,] GetTetromino()
         {
@@ -248,32 +258,33 @@
 
     public class TetrominoT : ITetromino
     {
-        int condition = 0;
-        static int[][,] tetromino = new int[4][,]
+        private static readonly int[][,] tetromino = 
         {
-            new int[2, 3]
+            new int[,]
             {
-                { 1,1,1 },
-                { 0,1,0 }
+                {1, 1, 1},
+                {0, 1, 0}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 1,0 },
-                { 1,1 },
-                { 1,0 }
+                {1, 0},
+                {1, 1},
+                {1, 0}
             },
-            new int[2, 3]
+            new int[,]
             {
-                { 0,1,0 },
-                { 1,1,1 }
+                {0, 1, 0},
+                {1, 1, 1}
             },
-            new int[3, 2]
+            new int[,]
             {
-                { 0,1 },
-                { 1,1 },
-                { 0,1 }
+                {0, 1},
+                {1, 1},
+                {0, 1}
             }
         };
+
+        private int condition;
 
         public int[,] GetTetromino()
         {
