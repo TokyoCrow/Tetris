@@ -16,14 +16,14 @@ namespace Tetris.WindowsForms
             repo = new JsonRepo();
             InitializeComponent();
             gameTimer.Interval = 400;
-            //gameTimer.Start();
+            gameTimer.Start();
         }
 
         public void DrawTetrominos(Graphics g)
         {
-            for (var y = 0; y < tetris.FallingTetromino.GetTetromino().GetLength(0); y++)
-            for (var x = 0; x < tetris.FallingTetromino.GetTetromino().GetLength(1); x++)
-                if (tetris.FallingTetromino.GetTetromino()[y, x] == 1)
+            for (var y = 0; y < tetris.FallingTetromino.Get().GetLength(0); y++)
+            for (var x = 0; x < tetris.FallingTetromino.Get().GetLength(1); x++)
+                if (tetris.FallingTetromino.Get()[y, x] == 1)
                     g.FillRectangle(Brushes.Red,
                         new Rectangle(50 + (tetris.FallingTetrominoX + x) * 25 - 1,
                             50 + (tetris.FallingTetrominoY + y) * 25 + 1, 25 - 1, 25 - 1));
@@ -79,15 +79,21 @@ namespace Tetris.WindowsForms
                     tetris.MoveDown();
                     Invalidate();
                     break;
+                case Keys.P:
+                    if (gameTimer.Enabled)
+                    {
+                        gameTimer.Stop();
+                        btnLoad.Enabled = true;
+                        btnSave.Enabled = true;
+                    }
+                    else
+                    {
+                        gameTimer.Start();
+                        btnLoad.Enabled = true;
+                        btnSave.Enabled = true;
+                    }
+                    break;
             }
-        }
-
-        private void btnPause_Click(object sender, EventArgs e)
-        {
-            if (gameTimer.Enabled)
-                gameTimer.Stop();
-            else
-                gameTimer.Start();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
