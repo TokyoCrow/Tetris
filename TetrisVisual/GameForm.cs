@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Tetris.Core;
 
 namespace Tetris.WindowsForms
 {
     public partial class GameForm : Form
     {
-        private readonly Core.Tetris tetris = new Core.Tetris();
+        private Core.Tetris tetris;
+        private IRepository repo;
 
         public GameForm()
         {
+            tetris = new Core.Tetris();
+            repo = new JsonRepo();
             InitializeComponent();
-            timer1.Interval = 400;
-            timer1.Start();
+            gameTimer.Interval = 400;
+            //gameTimer.Start();
         }
 
         public void DrawTetrominos(Graphics g)
@@ -49,7 +53,7 @@ namespace Tetris.WindowsForms
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (tetris.IsGameLost)
-                timer1.Stop();
+                gameTimer.Stop();
             lblScore.Text = tetris.Score.ToString();
             tetris.MoveDown();
             Invalidate();
@@ -76,6 +80,24 @@ namespace Tetris.WindowsForms
                     Invalidate();
                     break;
             }
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            if (gameTimer.Enabled)
+                gameTimer.Stop();
+            else
+                gameTimer.Start();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            repo.Save(tetris);
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            tetris = repo.Load();
         }
     }
 }

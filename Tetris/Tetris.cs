@@ -12,6 +12,13 @@ namespace Tetris.Core
 
         public int[,] GameField { get; private set; }
 
+        public int Score { get; private set; }
+        public bool IsGameLost { get; private set; }
+        public int FallingTetrominoX { get; private set; }
+        public int FallingTetrominoY { get; private set; }
+        public ITetromino FallingTetromino { get; private set; }
+        public ITetromino NextTetromino { get; private set; }
+
         public Tetris(int[,] field = null)
         {
             GameField = field ?? emptyField;
@@ -21,14 +28,6 @@ namespace Tetris.Core
             FallingTetromino = GetNewTetramino();
             NextTetromino = GetNewTetramino();
         }
-
-
-        public int Score { get; private set; }
-        public bool IsGameLost { get; private set; }
-        public int FallingTetrominoX { get; private set; } = NewTetrominoStartX;
-        public int FallingTetrominoY { get; private set; } = NewTetrominoStartY;
-        public ITetromino FallingTetromino { get; private set; }
-        public ITetromino NextTetromino { get; private set; }
 
         private ITetromino GetNewTetramino()
         {
