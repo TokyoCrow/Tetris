@@ -7,6 +7,10 @@ namespace Tetris.WindowsForms
 {
     public partial class GameForm : Form
     {
+        private readonly int blockSize = 25;
+        private readonly int gameFieldX= 50;
+        private readonly int gameFieldY= 50;
+
         private Core.Tetris tetris;
         private IRepository repo;
 
@@ -25,32 +29,32 @@ namespace Tetris.WindowsForms
             for (var x = 0; x < tetris.FallingTetromino.Get().GetLength(1); x++)
                 if (tetris.FallingTetromino.Get()[y, x] == 1)
                     g.FillRectangle(Brushes.Red,
-                        new Rectangle(50 + (tetris.FallingTetrominoX + x) * 25 - 1,
-                            50 + (tetris.FallingTetrominoY + y) * 25 + 1, 25 - 1, 25 - 1));
+                        new Rectangle(gameFieldX + (tetris.FallingTetrominoX + x) * blockSize ,
+                            gameFieldY + (tetris.FallingTetrominoY + y) * blockSize, blockSize, blockSize));
 
             for (var y = 0; y < tetris.GameField.GetLength(0); y++)
             for (var x = 0; x < tetris.GameField.GetLength(1); x++)
                 if (tetris.GameField[y, x] == 1)
-                    g.FillRectangle(Brushes.Red, new Rectangle(50 + x * 25, 50 + y * 25, 25, 25));
+                    g.FillRectangle(Brushes.Red, new Rectangle(gameFieldX + x * blockSize, gameFieldY + y * blockSize, blockSize, blockSize));
         }
 
         public void DrawGameField(Graphics g)
         {
             for (var y = 0; y <= tetris.GameField.GetLength(0); y++)
-                g.DrawLine(Pens.Black, new Point(50, 50 + y * 25),
-                    new Point(50 + tetris.GameField.GetLength(1) * 25, 50 + y * 25));
+                g.DrawLine(Pens.Black, new Point(gameFieldX, gameFieldY + y * blockSize),
+                    new Point(gameFieldX + tetris.GameField.GetLength(1) * blockSize, gameFieldY + y * blockSize));
             for (var x = 0; x <= tetris.GameField.GetLength(1); x++)
-                g.DrawLine(Pens.Black, new Point(50 + x * 25, 50),
-                    new Point(50 + x * 25, 50 + tetris.GameField.GetLength(0) * 25));
+                g.DrawLine(Pens.Black, new Point(gameFieldX + x * blockSize, gameFieldY),
+                    new Point(gameFieldX + x * blockSize, gameFieldY + tetris.GameField.GetLength(0) * blockSize));
         }
 
-        private void Form1_Paint(object sender, PaintEventArgs e)
+        private void GameForm_Paint(object sender, PaintEventArgs e)
         {
             DrawTetrominos(e.Graphics);
             DrawGameField(e.Graphics);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void gameTimer_Tick(object sender, EventArgs e)
         {
             if (tetris.IsGameLost)
                 gameTimer.Stop();
@@ -59,7 +63,7 @@ namespace Tetris.WindowsForms
             Invalidate();
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -89,21 +93,19 @@ namespace Tetris.WindowsForms
                     else
                     {
                         gameTimer.Start();
-                        btnLoad.Enabled = true;
-                        btnSave.Enabled = true;
+                        btnLoad.Enabled = false;
+                        btnSave.Enabled = false;
                     }
                     break;
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            repo.Save(tetris);
-        }
+        private void btnSave_Click(object sender, EventArgs e) => repo.Save(tetris);
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
             tetris = repo.Load();
+            Invalidate();
         }
     }
 }
