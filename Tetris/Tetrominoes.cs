@@ -6,24 +6,22 @@ namespace Tetris.Core
     {
         public int Condition { get; set; }
         public char Type { get; set; }
-
-        public TetraminoModel() { }
     }
 
 
     public class Tetramino
     {
-        private readonly int[][,] tetromino;
-        public int condition { get; private set; }
-        public char type { get; }
-
         private static readonly Random random = new Random();
+        private readonly int[][,] tetromino;
 
         public Tetramino(int[][,] _tetromino, char _type)
         {
             tetromino = _tetromino;
             type = _type;
         }
+
+        public int condition { get; private set; }
+        public char type { get; }
 
         public static Tetramino SetTetramino(TetraminoModel model)
         {
@@ -32,7 +30,10 @@ namespace Tetris.Core
             return tetramino;
         }
 
-        public void SetCondition(int _condition) => condition = _condition;
+        public void SetCondition(int _condition)
+        {
+            condition = _condition;
+        }
 
         public int[,] Get()
         {
@@ -83,143 +84,164 @@ namespace Tetris.Core
             }
         }
 
-        public static Tetramino O() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino O()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {1, 1},
-                    {1, 1}
-                }
-            }, 'O');
+                    new[,]
+                    {
+                        {1, 1},
+                        {1, 1}
+                    }
+                }, 'O');
+        }
 
-        public static Tetramino I() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino I()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {1, 1, 1, 1}
-                },
-                new int[,]
-                {
-                    {1},
-                    {1},
-                    {1},
-                    {1}
-                }
-            }, 'I');
+                    new[,]
+                    {
+                        {1, 1, 1, 1}
+                    },
+                    new[,]
+                    {
+                        {1},
+                        {1},
+                        {1},
+                        {1}
+                    }
+                }, 'I');
+        }
 
-        public static Tetramino S() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino S()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {0, 1, 1},
-                    {1, 1, 0}
-                },
-                new int[,]
-                {
-                    {1, 0},
-                    {1, 1},
-                    {0, 1}
-                }
-            }, 'S');
+                    new[,]
+                    {
+                        {0, 1, 1},
+                        {1, 1, 0}
+                    },
+                    new[,]
+                    {
+                        {1, 0},
+                        {1, 1},
+                        {0, 1}
+                    }
+                }, 'S');
+        }
 
-        public static Tetramino Z() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino Z()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {1, 1, 0},
-                    {0, 1, 1}
-                },
-                new int[,]
-                {
-                    {0, 1},
-                    {1, 1},
-                    {1, 0}
-                }
-            }, 'Z');
+                    new[,]
+                    {
+                        {1, 1, 0},
+                        {0, 1, 1}
+                    },
+                    new[,]
+                    {
+                        {0, 1},
+                        {1, 1},
+                        {1, 0}
+                    }
+                }, 'Z');
+        }
 
-        public static Tetramino L() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino L()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {1, 1, 1},
-                    {1, 0, 0}
-                },
-                new int[,]
-                {
-                    {1, 0},
-                    {1, 0},
-                    {1, 1}
-                },
-                new int[,]
-                {
-                    {0, 0, 1},
-                    {1, 1, 1}
-                },
-                new int[,]
-                {
-                    {1, 1},
-                    {0, 1},
-                    {0, 1}
-                }
-            }, 'L');
+                    new[,]
+                    {
+                        {1, 1, 1},
+                        {1, 0, 0}
+                    },
+                    new[,]
+                    {
+                        {1, 0},
+                        {1, 0},
+                        {1, 1}
+                    },
+                    new[,]
+                    {
+                        {0, 0, 1},
+                        {1, 1, 1}
+                    },
+                    new[,]
+                    {
+                        {1, 1},
+                        {0, 1},
+                        {0, 1}
+                    }
+                }, 'L');
+        }
 
-        public static Tetramino J() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino J()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {1, 1, 1},
-                    {0, 0, 1}
-                },
-                new int[,]
-                {
-                    {1, 1},
-                    {1, 0},
-                    {1, 0}
-                },
-                new int[,]
-                {
-                    {1, 0, 0},
-                    {1, 1, 1}
-                },
-                new int[,]
-                {
-                    {0, 1},
-                    {0, 1},
-                    {1, 1}
-                }
-            }, 'J');
+                    new[,]
+                    {
+                        {1, 1, 1},
+                        {0, 0, 1}
+                    },
+                    new[,]
+                    {
+                        {1, 1},
+                        {1, 0},
+                        {1, 0}
+                    },
+                    new[,]
+                    {
+                        {1, 0, 0},
+                        {1, 1, 1}
+                    },
+                    new[,]
+                    {
+                        {0, 1},
+                        {0, 1},
+                        {1, 1}
+                    }
+                }, 'J');
+        }
 
-        public static Tetramino T() => new Tetramino(
-            new int[][,]
-            {
-                new int[,]
+        public static Tetramino T()
+        {
+            return new Tetramino(
+                new[]
                 {
-                    {1, 1, 1},
-                    {0, 1, 0}
-                },
-                new int[,]
-                {
-                    {1, 0},
-                    {1, 1},
-                    {1, 0}
-                },
-                new int[,]
-                {
-                    {0, 1, 0},
-                    {1, 1, 1}
-                },
-                new int[,]
-                {
-                    {0, 1},
-                    {1, 1},
-                    {0, 1}
-                }
-            }, 'T');
+                    new[,]
+                    {
+                        {1, 1, 1},
+                        {0, 1, 0}
+                    },
+                    new[,]
+                    {
+                        {1, 0},
+                        {1, 1},
+                        {1, 0}
+                    },
+                    new[,]
+                    {
+                        {0, 1, 0},
+                        {1, 1, 1}
+                    },
+                    new[,]
+                    {
+                        {0, 1},
+                        {1, 1},
+                        {0, 1}
+                    }
+                }, 'T');
+        }
     }
 }

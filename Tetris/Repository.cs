@@ -14,25 +14,26 @@ namespace Tetris.Core
     {
         public void Save(Tetris tetris)
         {
-            using (StreamWriter sw = new StreamWriter(@"save.json"))
+            using (var sw = new StreamWriter(@"save.json"))
             using (JsonWriter jw = new JsonTextWriter(sw))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                TetrisModel tetrisModel = new TetrisModel(tetris);
-                serializer.Serialize(jw,tetrisModel);
+                var serializer = new JsonSerializer();
+                var tetrisModel = new TetrisModel(tetris);
+                serializer.Serialize(jw, tetrisModel);
             }
         }
 
         public Tetris Load()
         {
             Tetris tetris;
-            using (StreamReader save = File.OpenText(@"save.json"))
+            using (var save = File.OpenText(@"save.json"))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                TetrisModel tetrisModel = (TetrisModel)serializer.Deserialize(save, typeof(TetrisModel));
+                var serializer = new JsonSerializer();
+                var tetrisModel = (TetrisModel) serializer.Deserialize(save, typeof(TetrisModel));
                 tetris = new Tetris(tetrisModel);
                 Console.WriteLine(tetris.Score);
             }
+
             return tetris;
         }
     }
