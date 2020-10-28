@@ -10,34 +10,6 @@ namespace Tetris.Core
         Tetris Load();
     }
 
-    public class TetrisModel
-    {
-        public int[,] GameField { get; set; }
-        public int Score { get;  set; }
-        public bool IsGameLost { get;  set; }
-        public int FallingTetrominoX { get;  set; }
-        public int FallingTetrominoY { get;  set; }
-        public TetraminoModel FallingTetromino { get;  set; }
-        public TetraminoModel NextTetromino { get;  set; }
-
-        public TetrisModel() { }
-
-        public TetrisModel(Tetris tetris)
-        {
-            GameField = tetris.GameField;
-            Score = tetris.Score;
-            IsGameLost = tetris.IsGameLost;
-            FallingTetrominoX = tetris.FallingTetrominoX;
-            FallingTetrominoY = tetris.FallingTetrominoY;
-            FallingTetromino = new TetraminoModel();
-            FallingTetromino.Condition = tetris.FallingTetromino.condition;
-            FallingTetromino.Type = tetris.FallingTetromino.type;
-            NextTetromino = new TetraminoModel();
-            NextTetromino.Condition = tetris.NextTetromino.condition;
-            NextTetromino.Type = tetris.NextTetromino.type;
-        }
-    }
-
     public class JsonRepo : IRepository
     {
         public void Save(Tetris tetris)
