@@ -12,7 +12,7 @@ namespace Tetris.Core
 
     class TetrisModel
     {
-        public int[,] GameField { get;  set; }
+        public int[,] GameField { get; private set; }
         public int Score { get;  set; }
         public bool IsGameLost { get;  set; }
         public int FallingTetrominoX { get;  set; }
@@ -36,8 +36,6 @@ namespace Tetris.Core
             NextTetromino.Condition = tetris.NextTetromino.condition;
             NextTetromino.Type = tetris.NextTetromino.type;
         }
-
-
     }
 
     public class JsonRepo : IRepository
