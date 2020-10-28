@@ -25,10 +25,10 @@ namespace Tetris.Core
             type = _type;
         }
 
-        public Tetramino SetTetramino(int _condition, char _type)
+        public static Tetramino SetTetramino(TetraminoModel model)
         {
-            var tetramino = GetTetramino(_type);
-            tetramino.SetCondition(_condition);
+            var tetramino = GetTetramino(model.Type);
+            tetramino.SetCondition(model.Condition);
             return tetramino;
         }
 
