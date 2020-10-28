@@ -28,7 +28,7 @@
             // 
             // gameTimer
             // 
-            this.gameTimer.Tick += new System.EventHandler(this.timer1_Tick);
+            this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
             // lblScore
             // 
@@ -50,6 +50,7 @@
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             // 
             // btnLoad
             // 
@@ -62,6 +63,7 @@
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLoad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             // 
             // GameForm
             // 
@@ -73,8 +75,8 @@
             this.Controls.Add(this.lblScore);
             this.Name = "GameForm";
             this.Text = "Tetris";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameForm_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

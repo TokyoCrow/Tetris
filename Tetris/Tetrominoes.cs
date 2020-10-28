@@ -2,6 +2,14 @@
 
 namespace Tetris.Core
 {
+    public class TetraminoModel
+    {
+        public int Condition { get; set; }
+        public char Type { get; set; }
+
+        public TetraminoModel() { }
+    }
+
 
     public class Tetramino
     {
@@ -16,6 +24,15 @@ namespace Tetris.Core
             tetromino = _tetromino;
             type = _type;
         }
+
+        public static Tetramino SetTetramino(TetraminoModel model)
+        {
+            var tetramino = GetTetramino(model.Type);
+            tetramino.SetCondition(model.Condition);
+            return tetramino;
+        }
+
+        public void SetCondition(int _condition) => condition = _condition;
 
         public int[,] Get()
         {
@@ -52,6 +69,20 @@ namespace Tetris.Core
             }
         }
 
+        public static Tetramino GetTetramino(char _type)
+        {
+            switch (_type)
+            {
+                case 'O': return O();
+                case 'I': return I();
+                case 'S': return S();
+                case 'Z': return Z();
+                case 'L': return L();
+                case 'J': return J();
+                default: return T();
+            }
+        }
+
         public static Tetramino O() => new Tetramino(
             new int[][,]
             {
@@ -76,7 +107,7 @@ namespace Tetris.Core
                     {1},
                     {1}
                 }
-            },'I');
+            }, 'I');
 
         public static Tetramino S() => new Tetramino(
             new int[][,]

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Tetris.Core
 {
@@ -10,50 +10,56 @@ namespace Tetris.Core
         Tetris Load();
     }
 
-    class TetrisDataForSerialazing
+    public class TetrisModel
     {
-        public int[,] GameField { get; private set; }
-        public int Score { get; private set; }
-        public bool IsGameLost { get; private set; }
-        public int FallingTetrominoX { get; private set; }
-        public int FallingTetrominoY { get; private set; }
-        public Tetramino FallingTetromino { get; private set; }
-        public Tetramino NextTetromino { get; private set; }
+        public int[,] GameField { get; set; }
+        public int Score { get;  set; }
+        public bool IsGameLost { get;  set; }
+        public int FallingTetrominoX { get;  set; }
+        public int FallingTetrominoY { get;  set; }
+        public TetraminoModel FallingTetromino { get;  set; }
+        public TetraminoModel NextTetromino { get;  set; }
 
-        public TetrisDataForSerialazing(Tetris tetris)
+        public TetrisModel() { }
+
+        public TetrisModel(Tetris tetris)
         {
             GameField = tetris.GameField;
             Score = tetris.Score;
             IsGameLost = tetris.IsGameLost;
             FallingTetrominoX = tetris.FallingTetrominoX;
             FallingTetrominoY = tetris.FallingTetrominoY;
-            FallingTetromino = tetris.FallingTetromino;
-            NextTetromino = tetris.NextTetromino;
+            FallingTetromino = new TetraminoModel();
+            FallingTetromino.Condition = tetris.FallingTetromino.condition;
+            FallingTetromino.Type = tetris.FallingTetromino.type;
+            NextTetromino = new TetraminoModel();
+            NextTetromino.Condition = tetris.NextTetromino.condition;
+            NextTetromino.Type = tetris.NextTetromino.type;
         }
     }
 
     public class JsonRepo : IRepository
     {
-        public async void Save(Tetris tetris)
+        public void Save(Tetris tetris)
         {
-            using (FileStream save = new FileStream("save.json", FileMode.OpenOrCreate))
+            using (StreamWriter sw = new StreamWriter(@"save.json"))
+            using (JsonWriter jw = new JsonTextWriter(sw))
             {
-                TetrisDataForSerialazing tetrisData = new TetrisDataForSerialazing(tetris);
-                await JsonSerializer.SerializeAsync<TetrisDataForSerialazing>(save, tetrisData);
+                JsonSerializer serializer = new JsonSerializer();
+                TetrisModel tetrisModel = new TetrisModel(tetris);
+                serializer.Serialize(jw,tetrisModel);
             }
         }
 
         public Tetris Load()
         {
-            Tetris tetris = new Tetris();
-            try
+            Tetris tetris;
+            using (StreamReader save = File.OpenText(@"save.json"))
             {
-                string tetrisJson = File.ReadAllText("save.json");
-                tetris = new Tetris();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                JsonSerializer serializer = new JsonSerializer();
+                TetrisModel tetrisModel = (TetrisModel)serializer.Deserialize(save, typeof(TetrisModel));
+                tetris = new Tetris(tetrisModel);
+                Console.WriteLine(tetris.Score);
             }
             return tetris;
         }
