@@ -10,26 +10,34 @@ namespace Tetris.Core
         Tetris Load();
     }
 
-    class TetrisDataForSerialazing
+    class TetrisModel
     {
-        public int[,] GameField { get; private set; }
-        public int Score { get; private set; }
-        public bool IsGameLost { get; private set; }
-        public int FallingTetrominoX { get; private set; }
-        public int FallingTetrominoY { get; private set; }
-        public Tetramino FallingTetromino { get; private set; }
-        public Tetramino NextTetromino { get; private set; }
+        public int[,] GameField { get;  set; }
+        public int Score { get;  set; }
+        public bool IsGameLost { get;  set; }
+        public int FallingTetrominoX { get;  set; }
+        public int FallingTetrominoY { get;  set; }
+        public TetraminoModel FallingTetromino { get;  set; }
+        public TetraminoModel NextTetromino { get;  set; }
 
-        public TetrisDataForSerialazing(Tetris tetris)
+        public TetrisModel() { }
+
+        public TetrisModel(Tetris tetris)
         {
             GameField = tetris.GameField;
             Score = tetris.Score;
             IsGameLost = tetris.IsGameLost;
             FallingTetrominoX = tetris.FallingTetrominoX;
             FallingTetrominoY = tetris.FallingTetrominoY;
-            FallingTetromino = tetris.FallingTetromino;
-            NextTetromino = tetris.NextTetromino;
+            FallingTetromino = new TetraminoModel();
+            FallingTetromino.Condition = tetris.FallingTetromino.condition;
+            FallingTetromino.Type = tetris.FallingTetromino.type;
+            NextTetromino = new TetraminoModel();
+            NextTetromino.Condition = tetris.NextTetromino.condition;
+            NextTetromino.Type = tetris.NextTetromino.type;
         }
+
+
     }
 
     public class JsonRepo : IRepository
@@ -38,8 +46,8 @@ namespace Tetris.Core
         {
             using (FileStream save = new FileStream("save.json", FileMode.OpenOrCreate))
             {
-                TetrisDataForSerialazing tetrisData = new TetrisDataForSerialazing(tetris);
-                await JsonSerializer.SerializeAsync<TetrisDataForSerialazing>(save, tetrisData);
+                TetrisModel tetrisModel = new TetrisModel(tetris);
+                await JsonSerializer.SerializeAsync<TetrisModel>(save, tetrisModel);
             }
         }
 
@@ -49,7 +57,7 @@ namespace Tetris.Core
             try
             {
                 string tetrisJson = File.ReadAllText("save.json");
-                tetris = new Tetris();
+                TetrisModel tetrisModel = JsonSerializer.Deserialize<TetrisModel>(tetrisJson);
             }
             catch (Exception e)
             {
